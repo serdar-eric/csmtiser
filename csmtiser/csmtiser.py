@@ -20,8 +20,8 @@ class Csmtiser:
             line = line.decode(self.config.encoding)
             if SEP in line:
                 print("The token separator ({}) occurs in the test data. Output may not look as expected.".format(SEP))
-            replace_expr = ur'{0} ([^{0}]*\d[^{0}]*|[{1}]) {0}'.format(re.escape(SEP), "".join([re.escape(x) for x in string.punctuation if x != SEP]))
-            replacement = ur'{0} <np translation="\1">\1</np> {0}'.format(SEP)
+            replace_expr = r'{0} ([^{0}]*\d[^{0}]*|[{1}]) {0}'.format(re.escape(SEP), "".join([re.escape(x) for x in string.punctuation if x != SEP]))
+            replacement = r'{0} <np translation="\1">\1</np> {0}'.format(SEP)
             modline = SEP + ' ' + ' '.join(line.strip().replace(' ', SEP)) + ' ' + SEP + '\n'
             outline = re.sub(replace_expr, replacement, modline)  # .encode(self.config.encoding))
             out.write(outline.encode(self.config.encoding))
