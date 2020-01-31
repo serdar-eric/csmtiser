@@ -31,6 +31,7 @@ sys.stdout.flush()
 os.system(config.moses_scripts+'/training/train-model.perl -root-dir '+config.working_dir+' -corpus '+config.working_dir+'/train -f orig -e norm -alignment grow-diag-final-and -lm 0:'+str(config.lm_order)+':'+config.working_dir+'/train.norm.blm:8 -cores '+str(config.num_cores)+' --mgiza -mgiza-cpus '+str(config.num_cores)+' -external-bin-dir '+config.mgiza+' >> '+config.working_dir+'/train.log 2>&1')
 
 sys.stdout.write('Updating the moses.ini file\n')
+os.system('mkdir ' + config.working_dir + '/model')
 os.system('cp moses.ini ' + config.working_dir + "/model/")
 ini=open(config.working_dir+'/model/moses.ini').read().replace('[distortion-limit]\n6','[distortion-limit]\n0')
 modini=open(config.working_dir+'/model/moses.mod.ini','w')
